@@ -1,0 +1,1 @@
+Source: https://github.com/py-sdl/py-sdl2/tree/master/sdl2/test/resources
