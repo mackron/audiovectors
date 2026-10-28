@@ -39,6 +39,15 @@ printf '\000\000\200\277\000\000\200\077\000\000\000\277\000\000\000\000\000\000
 
 
 
+# MS ADPCM: 100 valid frames, with padding in the final compressed block.
+# Block capacity is 116 frames for mono and 104 frames for stereo.
+
+ffmpeg -hide_banner -loglevel error -f lavfi -i 'sine=frequency=440:sample_rate=8000' -af 'atrim=end_sample=100' -ac 1 -c:a adpcm_ms -block_size 64 -fflags +bitexact -flags:a +bitexact -y vectors/wav/generated/ffmpeg/msadpcm_padded_mono.wav
+
+ffmpeg -hide_banner -loglevel error -f lavfi -i 'sine=frequency=440:sample_rate=8000' -af 'atrim=end_sample=100' -ac 2 -c:a adpcm_ms -block_size 64 -fflags +bitexact -flags:a +bitexact -y vectors/wav/generated/ffmpeg/msadpcm_padded_stereo.wav
+
+
+
 # FLAC: four frames, with the right channel in reverse sample order.
 # FFmpeg requires experimental mode for 32-bit FLAC to avoid reducing it to 24 bits.
 
